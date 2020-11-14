@@ -6,12 +6,34 @@ call plug#begin('~/.vim/plugged')
     Plug 'junegunn/fzf.vim'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'itchyny/lightline.vim'
+    Plug 'kkoenig/wimproved.vim'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'OmniSharp/omnisharp-vim'
+    Plug 'dense-analysis/ale'
 call plug#end()
 
+let g:ale_linters = {
+\ 'cs': ['OmniSharp']
+\}
+
+" Disable Visual Bell
+set noerrorbells visualbell t_vb=
+autocmd GUIEnter * set visualbell t_vb=
+
+autocmd GUIEnter * silent! WToggleClean
+nmap <f11> :WToggleFullscreen<enter>
+nmap <c-tab> :tabnext<cr>
+
 " Coc Extensions
-let g:coc_global_extensions=['coc-tsserver', 'coc-json', 'coc-html', 'coc-css']
+let g:coc_global_extensions=['coc-tsserver', 'coc-json', 'coc-html', 'coc-css' ]
 
 " General Config
+syntax on
+set incsearch
+set tabstop=4 softtabstop=4
+set shiftwidth=4
+set expandtab
+set smartindent
 colorscheme gruvbox
 set background=dark
 set nu
@@ -19,6 +41,7 @@ set hidden
 set backspace=indent,eol,start
 set nobackup
 set nowritebackup
+set noswapfile
 set encoding=utf-8
 set guifont=Fantasque_Sans_Mono:h12
 set cmdheight=2
@@ -26,12 +49,28 @@ set updatetime=300
 set shortmess+=c
 set laststatus=2
 set noshowmode
-set guioptions=mT!cd
+set guioptions=!cd
+set colorcolumn=80
+set cursorline
 if has("patch-8.1.1564")
   set signcolumn=number
 else
   set signcolumn=yes
 endif
+language en
+
+:let mapleader = " "
+nnoremap <leader>f :NERDTreeToggle<enter>
+nnoremap <leader>v :NERDTreeFind<enter>
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+nnoremap <leader>g :Buffers<enter>
+
+nnoremap <leader>F :GFiles<enter>
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -87,9 +126,6 @@ autocmd CursorHold * silent call CocActionAsync('highlight')
 " Symbol renaming.
 nmap <leader>rn <Plug>(coc-rename)
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
 
 augroup mygroup
   autocmd!
