@@ -1,31 +1,30 @@
 " Plug Extensions
 call plug#begin(expand('<sfile>:p:h').'/plugged')
-Plug 'https://github.com/morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'joshdick/onedark.vim'
-Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
-if has("gui_win32")
-    Plug 'kkoenig/wimproved.vim'
-endif
+Plug 'purescript-contrib/purescript-vim'
+Plug 'elmcast/elm-vim'
+Plug 'neovimhaskell/haskell-vim'
 call plug#end()
+
+let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
+let g:haskell_enable_recursivedo = 1      " to enable highlighting of `mdo` and `rec`
+let g:haskell_enable_arrowsyntax = 1      " to enable highlighting of `proc`
+let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
+let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
+let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
+let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
 
 " Fix redrawtime exceeded
 set regexpengine=0 
 
-if has("gui_win32")
-    autocmd GUIEnter * silent! WToggleClean
-    nmap <silent> <f11> :WToggleFullscreen<enter>
-    language en
-endif
-
 " Disable Visual Bell
 set noerrorbells visualbell t_vb=
-autocmd GUIEnter * set visualbell t_vb=
 
 filetype plugin indent on
 syntax on
@@ -47,12 +46,8 @@ set shortmess+=c
 set signcolumn=number
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 set smartindent
-set noshowmode
-set guioptions=!cd
 set colorcolumn=80
 set incsearch
-set guifont=Fantasque_Sans_Mono:h15
-set laststatus=2
 
 let mapleader = " "
 
@@ -63,20 +58,6 @@ let NERDTreeDirArrows = 1
 
 nmap <silent> <F1> :GFiles<enter> 
 
-" Configure lightline with Coc
-let g:lightline = {
-\ 'colorscheme': 'gruvbox',
-\ 'active': {
-\   'left': [ [ 'mode', 'paste' ],
-\             [ 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ] ]
-\ },
-\ 'component_function': {
-\   'cocstatus': 'coc#status',
-\   'gitbranch': 'FugitiveHead'
-\ },
-\ }
-
-" Use autocmd to force lightline update.
-autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
-
 source <sfile>:p:h/coc/coc-settings.vim
+
+let g:elm_format_autosave = 1
