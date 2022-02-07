@@ -7,9 +7,10 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'purescript-contrib/purescript-vim'
-Plug 'elmcast/elm-vim'
 Plug 'neovimhaskell/haskell-vim'
+Plug 'elmcast/elm-vim'
+Plug 'purescript-contrib/purescript-vim'
+Plug 'sbdchd/neoformat'
 call plug#end()
 
 let g:haskell_enable_quantification = 1   " to enable highlighting of `forall`
@@ -19,6 +20,14 @@ let g:haskell_enable_pattern_synonyms = 1 " to enable highlighting of `pattern`
 let g:haskell_enable_typeroles = 1        " to enable highlighting of type roles
 let g:haskell_enable_static_pointers = 1  " to enable highlighting of `static`
 let g:haskell_backpack = 1                " to enable highlighting of backpack keywords
+
+let g:elm_format_autosave = 1
+let g:neoformat_enabled_purescript = ['purstidy']
+
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 " Fix redrawtime exceeded
 set regexpengine=0 
@@ -46,7 +55,6 @@ set shortmess+=c
 set signcolumn=number
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 set smartindent
-set colorcolumn=80
 set incsearch
 
 let mapleader = " "
@@ -57,6 +65,7 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 nmap <silent> <F1> :GFiles<enter> 
+nmap <silent> <c-p> :GFiles<enter> 
 
 source <sfile>:p:h/coc/coc-settings.vim
 
