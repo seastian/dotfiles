@@ -1,3 +1,23 @@
 {
-     "coc.preferences.formatOnSaveFiletypes": ["typescript", "typescriptreact"]
+  "coc.preferences.formatOnSaveFiletypes": [
+    "typescript",
+    "typescriptreact"
+  ],
+  "languageserver": {
+    "purescript": {
+      "command": "purescript-language-server",
+      "args": [
+        "--stdio",
+        "--config {}"
+      ],
+      "filetypes": [
+        "purescript"
+      ],
+      "rootPatterns": [
+        "bower.json",
+        "psc-package.json",
+        "spago.dhall"
+      ]
+    }
+  }
 }

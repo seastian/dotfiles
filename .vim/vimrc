@@ -3,16 +3,27 @@ call plug#begin(expand('<sfile>:p:h').'/plugged')
 Plug 'https://github.com/morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'joshdick/onedark.vim'
-Plug 'itchyny/lightline.vim'
+"Plug 'joshdick/onedark.vim'
+"Plug 'itchyny/lightline.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'elmcast/elm-vim'
+Plug 'purescript-contrib/purescript-vim'
+Plug 'sbdchd/neoformat'
 if has("gui_win32")
     Plug 'kkoenig/wimproved.vim'
 endif
 call plug#end()
+
+let g:elm_format_autosave = 1
+let g:neoformat_enabled_purescript = ['purstidy']
+
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 " Fix redrawtime exceeded
 set regexpengine=0 
@@ -47,9 +58,8 @@ set shortmess+=c
 set signcolumn=number
 set tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 set smartindent
-set noshowmode
 set guioptions=!cd
-set colorcolumn=80
+" set colorcolumn=80
 set incsearch
 set guifont=Fantasque_Sans_Mono:h15
 set laststatus=2
@@ -62,6 +72,7 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 nmap <silent> <F1> :GFiles<enter> 
+nmap <silent> <c-p> :GFiles<enter> 
 
 " Configure lightline with Coc
 let g:lightline = {
