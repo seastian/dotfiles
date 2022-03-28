@@ -1,23 +1,30 @@
 {
   "coc.preferences.formatOnSaveFiletypes": [
     "typescript",
-    "typescriptreact"
+    "typescriptreact",
+    "purescript"
   ],
   "languageserver": {
     "purescript": {
       "command": "purescript-language-server",
       "args": [
-        "--stdio",
-        "--config {}"
+        "--stdio"
       ],
       "filetypes": [
         "purescript"
       ],
+      "trace.server": "off",
       "rootPatterns": [
         "bower.json",
         "psc-package.json",
         "spago.dhall"
-      ]
+      ],
+      "settings": {
+        "purescript": {
+          "addSpagoSources": true,
+          "addNpmPath": true
+        }
+      }
     }
   }
 }
