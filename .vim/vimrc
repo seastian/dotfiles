@@ -63,4 +63,3 @@ nmap <silent> <c-p> :GFiles<enter>
 
 source <sfile>:p:h/coc/coc-settings.vim
 
-let g:elm_format_autosave = 1
