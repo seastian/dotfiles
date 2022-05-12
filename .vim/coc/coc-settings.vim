@@ -1,7 +1,7 @@
 " Coc configuration
 let g:coc_config_home = expand('<sfile>:p:h')
 let g:coc_data_home = expand('<sfile>:p:h')
-let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-snippets', 'coc-prettier', 'coc-html', 'coc-css']
+let g:coc_global_extensions = ['coc-tsserver', 'coc-json', 'coc-prettier', 'coc-html', 'coc-css']
 
 augroup mygroup
   autocmd!

@@ -8,10 +8,20 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'purescript-contrib/purescript-vim'
+Plug 'sbdchd/neoformat'
+Plug 'altercation/vim-colors-solarized'
 call plug#end()
+
+let g:purescript_disable_indent = 1
 
 command! -nargs=0 Format :call CocAction('format')
 nmap <leader>f :Format<cr>
+
+let g:neoformat_enabled_purescript = ['purstidy']
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 " Fix redrawtime exceeded
 set regexpengine=0 
@@ -20,12 +30,12 @@ set regexpengine=0
 set noerrorbells visualbell t_vb=
 
 filetype plugin indent on
-syntax on
+syntax enable
 set backspace=start,eol,indent
 set hidden
 set noswapfile
-colorscheme gruvbox
 set background=dark
+colorscheme solarized
 let mapleader = " "
 set cursorline
 set nu

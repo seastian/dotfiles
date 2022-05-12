@@ -2,23 +2,16 @@
   "coc.preferences.formatOnSaveFiletypes": [
     "typescript",
     "typescriptreact",
-    "purescript"
+    "javascript",
+    "json"
   ],
   "languageserver": {
     "purescript": {
       "command": "purescript-language-server",
-      "args": [
-        "--stdio"
-      ],
-      "filetypes": [
-        "purescript"
-      ],
+      "args": ["--stdio"],
+      "filetypes": ["purescript"],
       "trace.server": "off",
-      "rootPatterns": [
-        "bower.json",
-        "psc-package.json",
-        "spago.dhall"
-      ],
+      "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall"],
       "settings": {
         "purescript": {
           "addSpagoSources": true,
